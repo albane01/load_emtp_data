@@ -23,7 +23,7 @@ class ParamSimulation(dict):
         self._signals_and_positions = []
         self._white_list = white_list
         self._intersect_white_list_mfile = []
-        self._domain = 'u' # f : frequency, t : time
+        self.domain = 'u' # f : frequency, t : time
         self._index_domain = 0
         # Booleans
         self._params_loaded = False
@@ -115,10 +115,10 @@ class ParamSimulation(dict):
             link = list(param)
             link.pop(0)
             link = ('').join(link)
-            if self._domain == 'f':
+            if self.domain == 'f':
                 link = link + 'mag'
-                if [param, link] not in self._signals_to_load:
-                    self._signals_to_load.append([param, link])
+            if [param, link] not in self._signals_to_load:
+                self._signals_to_load.append([param, link])
         return self._signals_to_load
 
     def get_domain(self):
@@ -127,13 +127,13 @@ class ParamSimulation(dict):
         """
         if self._domain_initialized is False:
             if 'f' in self.keys():
-                self._domain = 'f'
+                self.domain = 'f'
                 self._domain_initialized = True
             elif 't' in self.keys():
-                self._domain = 't'
+                self.domain = 't'
                 self._domain_initialized = True
             else:
-                self._domain = 'u'
+                self.domain = 'u'
                 print('error : domain unknown')
   
     def load_signals_and_positions_for_specific_param(self, param, link):
@@ -250,9 +250,6 @@ class Simulation():
 
     def is_data_loaded(self):
         return self._data_loaded
-
-    def get_nb_it(self):
-        return self._nb_it
 
 class Simulations():
     """

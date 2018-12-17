@@ -26,6 +26,7 @@ class PssParams(dict):
         for line in f:
             self._read(line)
 
+
     def _read(self, line):
         """ 
         reads the pss file with is a correputed XML file
@@ -60,4 +61,3 @@ class PssParams(dict):
     def _load_dict(self):
         for i in range(len(self.ord_keys)):
             dict.__setitem__(self, self.ord_keys[i], self._values[i])
-
